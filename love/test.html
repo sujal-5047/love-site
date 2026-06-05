@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+overflow:hidden;
+background:linear-gradient(135deg,#3b82f6,#f9a8d4,#8b5cf6);
+}
+
+/* MAIN PAGE */
+
+#mainPage{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+position:relative;
+}
+
+h1{
+font-size:55px;
+color:white;
+text-align:center;
+text-shadow:0 0 20px white;
+margin-bottom:30px;
+padding:0 15px;
+}
+
+button{
+padding:16px 38px;
+font-size:24px;
+font-weight:bold;
+border:none;
+border-radius:40px;
+cursor:pointer;
+}
+
+#yesBtn{
+background:#00ff66;
+color:white;
+margin-right:15px;
+}
+
+#noBtn{
+background:#ff4444;
+color:white;
+position:absolute;
+}
+
+/* Decorations */
+
+.corner{
+position:fixed;
+font-size:38px;
+animation:pulse 2s infinite;
+z-index:10;
+}
+
+.c1{top:15px;left:20px;}
+.c2{top:80px;left:120px;}
+.c3{top:30px;right:20px;}
+.c4{top:120px;right:140px;}
+
+.c5{bottom:20px;left:20px;}
+.c6{bottom:110px;left:130px;}
+.c7{bottom:20px;right:20px;}
+.c8{bottom:120px;right:140px;}
+
+.c9{top:260px;left:60px;}
+.c10{top:260px;right:60px;}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.2);}
+100%{transform:scale(1);}
+}
+
+/* Video Page */
+
+#videoPage{
+display:none;
+width:100%;
+height:100vh;
+position:relative;
+overflow:hidden;
+background:linear-gradient(135deg,#3b82f6,#f9a8d4,#8b5cf6);
+}
+
+.videoContainer{
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+video{
+height:88vh;
+max-width:85%;
+border-radius:20px;
+box-shadow:0 0 30px white;
+}
+
+/* Floating Icons */
+
+.float{
+position:absolute;
+bottom:-60px;
+font-size:30px;
+animation:floatUp linear forwards;
+pointer-events:none;
+}
+
+@keyframes floatUp{
+0%{
+transform:translateY(0);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+</style>
+</head>
+<body>
+
+<div class="corner c1">❤️</div>
+<div class="corner c2">🌸</div>
+<div class="corner c3">😊</div>
+<div class="corner c4">🌹</div>
+
+<div class="corner c5">❤️</div>
+<div class="corner c6">🌸</div>
+<div class="corner c7">😊</div>
+<div class="corner c8">🌹</div>
+
+<div class="corner c9">❤️</div>
+<div class="corner c10">🌸</div>
+
+<div id="mainPage">
+
+<h1>
+🌸 😊 ❤️ 🌹<br>
+Will You Be My Girlfriend?<br>
+🌹 ❤️ 😊 🌸
+</h1>
+
+<div>
+<button id="yesBtn">💖 YES 💖</button>
+<button id="noBtn">❌ NO</button>
+</div>
+
+</div>
+
+<div id="videoPage">
+
+<div class="videoContainer">
+
+<video controls autoplay loop>
+<source src="Gf.mp4.mp4" type="video/mp4">
+</video>
+
+</div>
+
+</div>
+
+<script>
+
+let noBtn=document.getElementById("noBtn");
+let count=0;
+
+function moveNo(){
+
+count++;
+
+if(count>=10){
+noBtn.style.display="none";
+return;
+}
+
+let x=Math.random()*(window.innerWidth-180);
+let y=Math.random()*(window.innerHeight-120);
+
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+}
+
+noBtn.addEventListener("mouseover",moveNo);
+noBtn.addEventListener("click",moveNo);
+
+document.getElementById("yesBtn").onclick=function(){
+
+document.getElementById("mainPage").style.display="none";
+document.getElementById("videoPage").style.display="block";
+
+};
+
+function startFloating(){
+
+const icons=["❤️","🌸","😊","🌹","💖"];
+
+setInterval(()=>{
+
+let item=document.createElement("div");
+
+item.className="float";
+
+item.innerHTML=
+icons[Math.floor(Math.random()*icons.length)];
+
+item.style.left=Math.random()*100+"vw";
+
+item.style.fontSize=
+(25+Math.random()*30)+"px";
+
+item.style.animationDuration=
+(4+Math.random()*4)+"s";
+
+document.body.appendChild(item);
+
+setTimeout(()=>{
+item.remove();
+},8000);
+
+},250);
+
+}
+
+/* Floating icons start from first page */
+startFloating();
+
+</script>
+
+</body>
+</html>
